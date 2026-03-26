@@ -14,9 +14,6 @@ window.addEventListener('scroll', () => {
   document.getElementById('header').classList.toggle('scrolled', window.scrollY > 50);
 }, { passive: true });
 
-const hamburger = document.getElementById('hamburger');
-const nav = document.getElementById('nav');
-
 hamburger.addEventListener('click', () => {
   hamburger.classList.toggle('open');
   nav.classList.toggle('open');
@@ -71,7 +68,9 @@ document.getElementById('nextBtn').addEventListener('click', () => goTo(cur + 1)
 let autoPlay = setInterval(() => {
   goTo(cur + 1 > slides.length - visibleSlides() ? 0 : cur + 1);
 }, 3500);
+
 const viewport = document.querySelector('.slider-viewport');
+
 viewport.addEventListener('mouseenter', () => clearInterval(autoPlay));
 viewport.addEventListener('mouseleave', () => {
   autoPlay = setInterval(() => goTo(cur + 1 > slides.length - visibleSlides() ? 0 : cur + 1), 3500);
@@ -254,11 +253,6 @@ document.querySelectorAll('.tab-btn').forEach(btn => {
   });
 });
 
-const track = document.getElementById('sliderTrack');
-const slides = track.children;
-const dotsEl = document.getElementById('sliderDots');
-let cur = 0;
-
 function visibleSlides() {
   if (window.innerWidth <= 480) return 1;
   if (window.innerWidth <= 768) return 2;
@@ -285,11 +279,6 @@ function goTo(n) {
 document.getElementById('prevBtn').addEventListener('click', () => goTo(cur - 1));
 document.getElementById('nextBtn').addEventListener('click', () => goTo(cur + 1));
 
-let autoPlay = setInterval(() => {
-  goTo(cur + 1 > slides.length - visibleSlides() ? 0 : cur + 1);
-}, 3500);
-
-const viewport = document.querySelector('.slider-viewport');
 viewport.addEventListener('mouseenter', () => clearInterval(autoPlay));
 viewport.addEventListener('mouseleave', () => {
   autoPlay = setInterval(() => {
@@ -299,7 +288,6 @@ viewport.addEventListener('mouseleave', () => {
 
 window.addEventListener('resize', () => { buildDots(); goTo(cur); });
 
-let touchStartX = 0;
 track.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, { passive: true });
 track.addEventListener('touchend', e => {
   const diff = touchStartX - e.changedTouches[0].clientX;
@@ -321,7 +309,6 @@ function submitForm(e) {
   }, 1200);
 }
 
-const sections = [...document.querySelectorAll('section[id]')];
 window.addEventListener('scroll', () => {
   const y = window.pageYOffset;
   sections.forEach(s => {
