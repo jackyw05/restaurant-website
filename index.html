@@ -26,8 +26,46 @@
       <a href="#gallery" class="nav-link">Gallery</a>
       <a href="#contact" class="nav-link">Contact</a>
     </nav>
+    <button class="cart-toggle" id="cartToggle" aria-label="Open cart">
+      <i class="fas fa-shopping-basket"></i>
+      <span class="cart-badge" id="cartBadge">0</span>
+    </button>
   </div>
 </header>
+
+<div class="cart-overlay" id="cartOverlay"></div>
+<aside class="cart-sidebar" id="cartSidebar">
+  <div class="cart-header">
+    <h2 class="cart-title">Your Order</h2>
+    <button class="cart-close" id="cartClose" aria-label="Close cart">
+      <i class="fas fa-times"></i>
+    </button>
+  </div>
+  <div class="cart-body">
+    <div class="cart-empty" id="cartEmpty">
+      <i class="fas fa-shopping-basket"></i>
+      <p>Your cart is empty</p>
+      <span>Browse the menu and add some items!</span>
+    </div>
+    <ul class="cart-items" id="cartItems"></ul>
+  </div>
+  <div class="cart-footer hidden" id="cartFooter">
+    <div class="cart-total-row">
+      <span>Subtotal</span>
+      <span id="cartSubtotal">$0.00</span>
+    </div>
+    <div class="cart-total-row cart-total-main">
+      <span>Total</span>
+      <span id="cartTotal">$0.00</span>
+    </div>
+    <button class="btn-primary full" id="checkoutBtn">
+      <i class="fas fa-credit-card"></i> Proceed to Checkout
+    </button>
+    <button class="btn-clear-cart" id="clearCartBtn">
+      <i class="fas fa-trash-alt"></i> Clear Cart
+    </button>
+  </div>
+</aside>
 
 <section id="home" class="hero">
   <div class="hero-bg"></div>
@@ -51,47 +89,129 @@
         <button class="tab-btn" data-tab="desserts">Extras</button>
       </div>
     </div>
+
     <div class="tab-content active" id="starters">
       <div class="menu-grid">
-        <div class="menu-card"><h3>Burgers</h3><p>Grass-fed patties topped with lettuce, tomato, cheese, onions, bacon</p><span class="price">$10</span></div>
-        <div class="menu-card"><h3>Tacos</h3><p>Corn-based tortilla filled with a combination of seasoned meat, cheese, guacamole, white onions, tomato</p><span class="price">$10</span></div>
-        <div class="menu-card"><h3>Burritos</h3><p>Corn-based tortilla wrapped with a combination of seasoned meat cheese, rice, beans, cheese, salsa</p><span class="price">$12</span></div>
-        <div class="menu-card"><h3>Pizza</h3><p>Plain cheese pizza, or topped with pepperoni</p><span class="price">$10</span></div>
+        <div class="menu-card" data-name="Burger" data-price="10" data-emoji="🍔">
+          <h3>Burgers</h3>
+          <p>Grass-fed patties topped with lettuce, tomato, cheese, onions, bacon</p>
+          <div class="menu-card-footer">
+            <span class="price">$10</span>
+            <button class="add-to-cart-btn"><i class="fas fa-plus"></i> Add to Cart</button>
+          </div>
+        </div>
+        <div class="menu-card" data-name="Tacos" data-price="10" data-emoji="🌮">
+          <h3>Tacos</h3>
+          <p>Corn-based tortilla filled with a combination of seasoned meat, cheese, guacamole, white onions, tomato</p>
+          <div class="menu-card-footer">
+            <span class="price">$10</span>
+            <button class="add-to-cart-btn"><i class="fas fa-plus"></i> Add to Cart</button>
+          </div>
+        </div>
+        <div class="menu-card" data-name="Burritos" data-price="12" data-emoji="🌯">
+          <h3>Burritos</h3>
+          <p>Corn-based tortilla wrapped with a combination of seasoned meat cheese, rice, beans, cheese, salsa</p>
+          <div class="menu-card-footer">
+            <span class="price">$12</span>
+            <button class="add-to-cart-btn"><i class="fas fa-plus"></i> Add to Cart</button>
+          </div>
+        </div>
+        <div class="menu-card" data-name="Pizza" data-price="10" data-emoji="🍕">
+          <h3>Pizza</h3>
+          <p>Plain cheese pizza, or topped with pepperoni</p>
+          <div class="menu-card-footer">
+            <span class="price">$10</span>
+            <button class="add-to-cart-btn"><i class="fas fa-plus"></i> Add to Cart</button>
+          </div>
+        </div>
       </div>
     </div>
+
     <div class="tab-content" id="pasta">
       <div class="menu-grid">
-        <div class="menu-card"><h3>Classic Fries</h3><span class="price">$8</span></div>
-        <div class="menu-card"><h3>Chicken Nuggets</h3><span class="price">$8</span></div>
+        <div class="menu-card" data-name="Classic Fries" data-price="8" data-emoji="🍟">
+          <h3>Classic Fries</h3>
+          <div class="menu-card-footer">
+            <span class="price">$8</span>
+            <button class="add-to-cart-btn"><i class="fas fa-plus"></i> Add to Cart</button>
+          </div>
+        </div>
+        <div class="menu-card" data-name="Chicken Nuggets" data-price="8" data-emoji="🍗">
+          <h3>Chicken Nuggets</h3>
+          <div class="menu-card-footer">
+            <span class="price">$8</span>
+            <button class="add-to-cart-btn"><i class="fas fa-plus"></i> Add to Cart</button>
+          </div>
+        </div>
       </div>
     </div>
+
     <div class="tab-content" id="mains">
       <div class="menu-grid">
-        <div class="menu-card"><h3>Water</h3><span class="price">$3</span></div>
-        <div class="menu-card"><h3>Soda</h3><span class="price">$3</span></div>
-        <div class="menu-card"><h3>Lemonade</h3><span class="price">$3</span></div>
-        <div class="menu-card"><h3>Iced Tea</h3><span class="price">$3</span></div>
+        <div class="menu-card" data-name="Water" data-price="3" data-emoji="💧">
+          <h3>Water</h3>
+          <div class="menu-card-footer">
+            <span class="price">$3</span>
+            <button class="add-to-cart-btn"><i class="fas fa-plus"></i> Add to Cart</button>
+          </div>
+        </div>
+        <div class="menu-card" data-name="Soda" data-price="3" data-emoji="🥤">
+          <h3>Soda</h3>
+          <div class="menu-card-footer">
+            <span class="price">$3</span>
+            <button class="add-to-cart-btn"><i class="fas fa-plus"></i> Add to Cart</button>
+          </div>
+        </div>
+        <div class="menu-card" data-name="Lemonade" data-price="3" data-emoji="🍋">
+          <h3>Lemonade</h3>
+          <div class="menu-card-footer">
+            <span class="price">$3</span>
+            <button class="add-to-cart-btn"><i class="fas fa-plus"></i> Add to Cart</button>
+          </div>
+        </div>
+        <div class="menu-card" data-name="Iced Tea" data-price="3" data-emoji="🧋">
+          <h3>Iced Tea</h3>
+          <div class="menu-card-footer">
+            <span class="price">$3</span>
+            <button class="add-to-cart-btn"><i class="fas fa-plus"></i> Add to Cart</button>
+          </div>
+        </div>
       </div>
     </div>
+
     <div class="tab-content" id="desserts">
       <div class="menu-grid">
-        <div class="menu-card"><h3>Extra Fries</h3><span class="price">$5</span></div>
-        <div class="menu-card"><h3>Extra Sauce</h3><span class="price">$3</span></div>
+        <div class="menu-card" data-name="Extra Fries" data-price="5" data-emoji="🍟">
+          <h3>Extra Fries</h3>
+          <div class="menu-card-footer">
+            <span class="price">$5</span>
+            <button class="add-to-cart-btn"><i class="fas fa-plus"></i> Add to Cart</button>
+          </div>
+        </div>
+        <div class="menu-card" data-name="Extra Sauce" data-price="3" data-emoji="🥫">
+          <h3>Extra Sauce</h3>
+          <div class="menu-card-footer">
+            <span class="price">$3</span>
+            <button class="add-to-cart-btn"><i class="fas fa-plus"></i> Add to Cart</button>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
+<!-- ABOUT -->
 <section id="about" class="section section-cream">
   <div class="container about-layout">
     <div class="about-text">
-      <span class="section-label left-label">About Us </span>
+      <span class="section-label left-label">About Us</span>
       <h2 class="section-title left">Foodies</h2>
       <p>Foodies is an American fast food restaurant that strives to be fresh, delicious, and enjoyable. It was established in 2026 with a mission to serve foods at the highest quality with convenience and affordability.</p>
     </div>
   </div>
 </section>
 
+<!-- GALLERY -->
 <section id="gallery" class="section">
   <div class="container">
     <h2 class="section-title">Gallery</h2>
@@ -99,14 +219,14 @@
       <button class="slider-btn prev" id="prevBtn">&#10094;</button>
       <div class="slider-viewport">
         <div class="slider-track" id="sliderTrack">
-          <div class="slide"><div class="slide-img"><img src="images/burgers.jpg"></div><p class="slide-cap">Burger</p></div>
-          <div class="slide"><div class="slide-img"><img src="images/burger.jpg"></div><p class="slide-cap">Plain Burger</p></div>
-          <div class="slide"><div class="slide-img"><img src="images/taco.jpg"></div><p class="slide-cap">Tacos</p></div>
-          <div class="slide"><div class="slide-img"><img src="images/pizza.jpg"></div><p class="slide-cap">Pizza</p></div>
-          <div class="slide"><div class="slide-img"><img src="images/burrito.jpg"></div><p class="slide-cap">Burritos</p></div>
-          <div class="slide"><div class="slide-img"><img src="images/fries.jpg"></div><p class="slide-cap">Fries</p></div>
-          <div class="slide"><div class="slide-img"><img src="images/chicken-nuggets.jpg"></div><p class="slide-cap">Chicken Nuggets</p></div>
-          <div class="slide"><div class="slide-img"><img src="images/soda.jpg"></div><p class="slide-cap">Soda</p></div>
+          <div class="slide"><div class="slide-img"><img src="images/burgers1.jpg" alt="Burger"></div><p class="slide-cap">Burger</p></div>
+          <div class="slide"><div class="slide-img"><img src="images/burger.jpg" alt="Plain Burger"></div><p class="slide-cap">Plain Burger</p></div>
+          <div class="slide"><div class="slide-img"><img src="images/taco.jpg" alt="Tacos"></div><p class="slide-cap">Tacos</p></div>
+          <div class="slide"><div class="slide-img"><img src="images/pizza.jpg" alt="Pizza"></div><p class="slide-cap">Pizza</p></div>
+          <div class="slide"><div class="slide-img"><img src="images/burrito.jpg" alt="Burritos"></div><p class="slide-cap">Burritos</p></div>
+          <div class="slide"><div class="slide-img"><img src="images/fries.jpg" alt="Fries"></div><p class="slide-cap">Fries</p></div>
+          <div class="slide"><div class="slide-img"><img src="images/chicken-nuggets.jpg" alt="Chicken Nuggets"></div><p class="slide-cap">Chicken Nuggets</p></div>
+          <div class="slide"><div class="slide-img"><img src="images/soda.jpg" alt="Soda"></div><p class="slide-cap">Soda</p></div>
         </div>
       </div>
       <button class="slider-btn next" id="nextBtn">&#10095;</button>
@@ -121,7 +241,8 @@
     <div class="contact-layout">
       <div class="contact-left">
         <div class="map-wrap">
-          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1028.8924609607748!2d-73.96476995829578!3d40.76781370089419!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c258eb899f0889%3A0xb5e90aa7d877ee1f!2sHunter%20College!5e0!3m2!1sen!2sus!4v1772840836047!5m2!1sen!2sus" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1028.8924609607748!2d-73.96476995829578!3d40.76781370089419!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c258eb899f0889%3A0xb5e90aa7d877ee1f!2sHunter%20College!5e0!3m2!1sen!2sus!4v1772840836047!5m2!1sen!2sus"
+            width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
         </div>
       </div>
       <div class="contact-right">
@@ -159,7 +280,6 @@
         <tr><td>Fri – Saturday</td><td>12:00pm – 11:00pm</td></tr>
         <tr><td>Sunday</td><td>12:00pm – 9:00pm</td></tr>
       </table>
-    </div>
     </div>
   </div>
   <div class="footer-bottom"><p>© 2026 Foodies. All rights reserved.</p></div>
