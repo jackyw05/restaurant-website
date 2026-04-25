@@ -1,14 +1,14 @@
 import { useState, useEffect, useRef } from 'react';
 
 const slides = [
-  { src: '/images/burgers.jpg', cap: 'Burger' },
-  { src: '/images/burger.jpg',   cap: 'Plain Burger' },
-  { src: '/images/taco.jpg',     cap: 'Tacos' },
-  { src: '/images/pizza.jpg',    cap: 'Pizza' },
-  { src: '/images/burrito.jpg',  cap: 'Burritos' },
-  { src: '/images/fries.jpg',    cap: 'Fries' },
-  { src: '/images/chicken-nuggets.jpg', cap: 'Chicken Nuggets' },
-  { src: '/images/soda.jpg',     cap: 'Soda' },
+  { src: '${base}/images/burgers.jpg', cap: 'Burger' },
+  { src: '${base}/images/burger.jpg',   cap: 'Plain Burger' },
+  { src: '${base}/images/taco.jpg',     cap: 'Tacos' },
+  { src: '${base}/images/pizza.jpg',    cap: 'Pizza' },
+  { src: '${base}/images/burrito.jpg',  cap: 'Burritos' },
+  { src: '${base}/images/fries.jpg',    cap: 'Fries' },
+  { src: '${base}/images/chicken-nuggets.jpg', cap: 'Chicken Nuggets' },
+  { src: '${base}/images/soda.jpg',     cap: 'Soda' },
 ];
 
 function visibleCount() {
