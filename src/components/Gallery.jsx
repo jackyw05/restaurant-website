@@ -1,14 +1,16 @@
 import { useState, useEffect, useRef } from 'react';
 
+const base = import.meta.env.BASE_URL;
+
 const slides = [
-  { src: '${base}/images/burgers.jpg', cap: 'Burger' },
-  { src: '${base}/images/burger.jpg',   cap: 'Plain Burger' },
-  { src: '${base}/images/taco.jpg',     cap: 'Tacos' },
-  { src: '${base}/images/pizza.jpg',    cap: 'Pizza' },
-  { src: '${base}/images/burrito.jpg',  cap: 'Burritos' },
-  { src: '${base}/images/fries.jpg',    cap: 'Fries' },
-  { src: '${base}/images/chicken-nuggets.jpg', cap: 'Chicken Nuggets' },
-  { src: '${base}/images/soda.jpg',     cap: 'Soda' },
+  { src: `${base}images/burgers.jpg`, cap: 'Burger' },
+  { src: `${base}images/burger.jpg`,   cap: 'Plain Burger' },
+  { src: `${base}images/taco.jpg`,     cap: 'Tacos' },
+  { src: `${base}images/pizza.jpg`,    cap: 'Pizza' },
+  { src: `${base}images/burrito.jpg`,  cap: 'Burritos' },
+  { src: `${base}images/fries.jpg`,    cap: 'Fries' },
+  { src: `${base}images/chicken-nuggets.jpg`, cap: 'Chicken Nuggets' },
+  { src: `${base}images/soda.jpg`,     cap: 'Soda' },
 ];
 
 function visibleCount() {
