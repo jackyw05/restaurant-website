@@ -368,7 +368,7 @@ a { text-decoration: none; color: inherit; }
 .hero-bg {
   position: absolute;
   inset: 0;
-  background: url('images/hero.png') no-repeat;
+  background: url('/restaurant-website/images/hero.png') no-repeat;
   background-color: #3c1c08;
   background-position: center center;
 }
