@@ -6,8 +6,8 @@ const cors     = require('cors');
 const app = express();
 app.use(cors({
   origin: [
-    'http://localhost:5173',                    // local dev
-    'https://your-app.vercel.app',              // Vercel URL
+    'http://localhost:5173',                             // local dev
+    'https://foodies-six-sooty.vercel.app',              // Vercel URL
   ]
 }));
 app.use(express.json());
