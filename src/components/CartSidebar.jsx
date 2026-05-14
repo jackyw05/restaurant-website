@@ -1,33 +1,34 @@
 import { useEffect } from 'react';
+import { placeOrder } from '../services/api';
 
 function CartSidebar({ cart, isOpen, onClose, onUpdate, onClear }) {
-  const entries = Object.entries(cart);
+  const entries    = Object.entries(cart);
   const totalPrice = entries.reduce((s, [, v]) => s + v.price * v.qty, 0);
-  const totalQty   = entries.reduce((s, [, v]) => s + v.qty, 0);
 
-  // replaces: document.addEventListener('keydown', e => { if e.key === 'Escape' closeCart() })
   useEffect(() => {
     const handleKey = (e) => { if (e.key === 'Escape') onClose(); };
     document.addEventListener('keydown', handleKey);
     return () => document.removeEventListener('keydown', handleKey);
   }, [onClose]);
 
-  // replaces: document.body.style.overflow = 'hidden'
   useEffect(() => {
     document.body.style.overflow = isOpen ? 'hidden' : '';
   }, [isOpen]);
 
-  const handleCheckout = () => {
-    alert("Thank you for your order! 🍔\nWe'll have it ready for you shortly.");
-    onClear();
-    onClose();
+  const handleCheckout = async () => {
+    try {
+      await placeOrder(cart);           // saves order to MongoDB
+      alert("Thank you for your order! 🍔\nWe'll have it ready shortly.");
+      onClear();
+      onClose();
+    } catch (err) {
+      alert('Something went wrong placing your order. Please try again.');
+    }
   };
 
   return (
     <>
-      {/* replaces: cartOverlay.addEventListener('click', closeCart) */}
       <div className={`cart-overlay ${isOpen ? 'active' : ''}`} onClick={onClose} />
-
       <aside className={`cart-sidebar ${isOpen ? 'open' : ''}`}>
         <div className="cart-header">
           <h2 className="cart-title">Your Order</h2>
@@ -35,7 +36,6 @@ function CartSidebar({ cart, isOpen, onClose, onUpdate, onClear }) {
             <i className="fas fa-times"></i>
           </button>
         </div>
-
         <div className="cart-body">
           {entries.length === 0 ? (
             <div className="cart-empty">
@@ -53,18 +53,15 @@ function CartSidebar({ cart, isOpen, onClose, onUpdate, onClear }) {
                     <div className="cart-item-price">${(price * qty).toFixed(2)}</div>
                   </div>
                   <div className="cart-item-controls">
-                    <button className="qty-btn remove-btn"
-                            onClick={() => onUpdate(name, -1)}>−</button>
+                    <button className="qty-btn remove-btn" onClick={() => onUpdate(name, -1)}>−</button>
                     <span className="cart-item-qty">{qty}</span>
-                    <button className="qty-btn"
-                            onClick={() => onUpdate(name, +1)}>+</button>
+                    <button className="qty-btn"            onClick={() => onUpdate(name, +1)}>+</button>
                   </div>
                 </li>
               ))}
             </ul>
           )}
         </div>
-
         {entries.length > 0 && (
           <div className="cart-footer">
             <div className="cart-total-row">

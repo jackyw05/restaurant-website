@@ -1,6 +1,6 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import MenuCard from './MenuCard';
-import { menuData } from '../data/menuData';
+import { fetchMenu } from '../services/api';
 
 const tabs = [
   { id: 'mains',  label: 'Mains' },
@@ -11,6 +11,15 @@ const tabs = [
 
 function Menu({ onAddToCart }) {
   const [activeTab, setActiveTab] = useState('mains');
+  const [menuData, setMenuData]   = useState({ mains:[], sides:[], drinks:[], extras:[] });
+  const [loading, setLoading]     = useState(true);
+  const [error, setError]         = useState(null);
+
+  useEffect(() => {
+    fetchMenu()
+      .then(data => { setMenuData(data); setLoading(false); })
+      .catch(err  => { setError(err.message); setLoading(false); });
+  }, []);
 
   return (
     <section id="menu" className="section">
@@ -28,9 +37,11 @@ function Menu({ onAddToCart }) {
           </div>
         </div>
         <div className="tab-content active">
+          {loading && <p style={{ textAlign:'center' }}>Loading menu...</p>}
+          {error   && <p style={{ textAlign:'center', color:'red' }}>{error}</p>}
           <div className="menu-grid">
             {menuData[activeTab].map(item => (
-              <MenuCard key={item.name} item={item} onAddToCart={onAddToCart} />
+              <MenuCard key={item._id} item={item} onAddToCart={onAddToCart} />
             ))}
           </div>
         </div>
