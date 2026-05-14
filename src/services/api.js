@@ -1,7 +1,7 @@
 const BASE = import.meta.env.PROD
-  ? 'https://foodies-api.onrender.com/api'
+  ? `${import.meta.env.VITE_API_URL}/api`
   :  '/api';
-  
+
 // Fetch all menu items grouped by category
 export async function fetchMenu() {
   const res = await fetch(`${BASE}/menu`);

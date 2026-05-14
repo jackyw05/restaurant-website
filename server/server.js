@@ -4,7 +4,12 @@ const mongoose = require('mongoose');
 const cors     = require('cors');
 
 const app = express();
-app.use(cors());
+app.use(cors({
+  origin: [
+    'http://localhost:5173',                    // local dev
+    'https://your-app.vercel.app',              // Vercel URL
+  ]
+}));
 app.use(express.json());
 
 // Routes
