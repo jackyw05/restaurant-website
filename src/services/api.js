@@ -1,6 +1,4 @@
-const BASE = import.meta.env.PROD
-  ? `${import.meta.env.VITE_API_URL}/api`
-  :  '/api';
+const BASE = '/api';
 
 // Fetch all menu items grouped by category
 export async function fetchMenu() {
