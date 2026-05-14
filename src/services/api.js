@@ -1,5 +1,7 @@
-const BASE = 'http://localhost:4000/api';
-
+const BASE = import.meta.env.PROD
+  ? 'https://foodies-api.onrender.com/api'
+  :  '/api';
+  
 // Fetch all menu items grouped by category
 export async function fetchMenu() {
   const res = await fetch(`${BASE}/menu`);
